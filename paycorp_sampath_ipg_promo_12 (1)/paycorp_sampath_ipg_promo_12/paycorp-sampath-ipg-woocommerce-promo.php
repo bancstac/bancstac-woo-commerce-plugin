@@ -3,11 +3,11 @@ ob_start();
 
 if (!defined('ABSPATH')) exit;
 /*
-Plugin Name: Paycorp Sampath Bank IPG PROMO 3
+Plugin Name: Paycorp Sampath Bank IPG PROMO 12
 License URI: https://www.paycorp.lk/
-Description: Sampath IPG by Paycorp 3 Month.
+Description: Sampath IPG by Paycorp 12 Month.
 Version: 1.8.5.6 - woocommerce 5.6.0
-Promo 3
+Promo 12
 Author: Paycorp International
 
 */
@@ -15,16 +15,16 @@ Author: Paycorp International
 
 
 /** Initiating Methods to run after plugin loaded */
-add_action('plugins_loaded', 'woocommerce_sampath_bank_promo_3_gateway', 0);
+add_action('plugins_loaded', 'woocommerce_sampath_bank_promo_12_gateway', 0);
 
 
-function woocommerce_sampath_bank_promo_3_gateway()
+function woocommerce_sampath_bank_promo_12_gateway()
 {
 
 
      if (!class_exists('WC_Payment_Gateway')) return;
 
-    class WC_Sampath_promo_3 extends WC_Payment_Gateway
+    class WC_Sampath_promo_12 extends WC_Payment_Gateway
     {
         public function __construct()
         {
@@ -32,8 +32,8 @@ function woocommerce_sampath_bank_promo_3_gateway()
             $this->plugin_path = plugin_dir_path(__FILE__);
 			
             $this->plugin_url = plugin_dir_url(__FILE__);
-            $this->id = 'sampathipgpromo_3';
-            $this->method_title = 'Paycorp Sampath Promo 3';
+            $this->id = 'sampathipgpromo_12';
+            $this->method_title = 'Paycorp Sampath Promo 12';
             $this->icon = apply_filters('woocommerce_Paysecure_icon', '' . $this->plugin_url . 'images/sampath.jpg');
             $this->has_fields = false;
 
@@ -79,7 +79,7 @@ function woocommerce_sampath_bank_promo_3_gateway()
                     'default' => 'no'),
 
                 'title' => array(
-                    'title' => __('Title:', 'paycorp promo_3'),
+                    'title' => __('Title:', 'paycorp promo_12'),
                     'type' => 'text',
                     'description' => __('This controls the title which the user sees during checkout.', 'paycorp'),
                     'default' => __('Paycorp Payment Gateway', 'paycorp')),
@@ -343,23 +343,23 @@ function woocommerce_sampath_bank_promo_3_gateway()
 
 
     if (isset($_POST['clientRef']) && isset($_POST['reqid'])) {
-        $WC = new WC_Sampath_promo_3();
+        $WC = new WC_Sampath_promo_12();
     }
 
 
-    function woocommerce_add_sampath_promo_3_gateway($methods)
+    function woocommerce_add_sampath_promo_12_gateway($methods)
     {
-        $methods[] = 'WC_Sampath_promo_3';
+        $methods[] = 'WC_Sampath_promo_12';
         return $methods;
     }
 
-    add_filter('woocommerce_payment_gateways', 'woocommerce_add_sampath_promo_3_gateway');
+    add_filter('woocommerce_payment_gateways', 'woocommerce_add_sampath_promo_12_gateway');
 
 
 
-    add_shortcode('paycorp_sampath_ipg_promo_3_dispaly_error_msg', 'paycorp_sampath_promo_3_dispaly_error_message');
+    add_shortcode('paycorp_sampath_ipg_promo_12_dispaly_error_msg', 'paycorp_sampath_promo_12_dispaly_error_message');
 
-    function paycorp_sampath_promo_3_dispaly_success_message()
+    function paycorp_sampath_promo_12_dispaly_success_message()
     {
         
         if (isset($_GET['paycorp_txn_id'])) {
@@ -371,7 +371,7 @@ function woocommerce_sampath_bank_promo_3_gateway()
     do_action( 'woocommerce_thankyou', $order->get_id());
     }
     
-    add_shortcode('paycorp_sampath_ipg_promo_3_dispaly_success_msg', 'paycorp_sampath_promo_3_dispaly_success_message');
+    add_shortcode('paycorp_sampath_ipg_promo_12_dispaly_success_msg', 'paycorp_sampath_promo_12_dispaly_success_message');
     
 }
 
