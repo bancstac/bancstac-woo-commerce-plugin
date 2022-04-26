@@ -6,7 +6,7 @@ if (!defined('ABSPATH')) exit;
 Plugin Name: Paycorp Sampath Bank IPG
 License URI: https://www.paycorp.com.au/
 Description: Sampath IPG by Paycorp.
-Version: 1.8.5.8 - woocommerce 5.8.0
+Version: 1.8.5.9 - woocommerce 5.9.0
 Author: Paycorp International
 
 */
@@ -50,7 +50,7 @@ function woocommerce_sampath_bank_gateway()
             $this->sucess_responce_code = $this->settings['sucess_responce_code'];
             add_action('init', array(&$this, 'check_SampathIPG_response'));
             $this->gateway_config();
-            if ( version_compare( WC()->version, '5.9', '<' )) {
+            if ( version_compare( WC()->version, '6.0', '<' )) {
                 add_action('woocommerce_update_options_payment_gateways_' . $this->id, array(&$this, 'process_admin_options'));
             } 
             else{
@@ -209,7 +209,7 @@ function woocommerce_sampath_bank_gateway()
 		   //$actual_link = $order->get_checkout_order_received_url();
            //$actual_link = add_query_arg('order', $order_id, add_query_arg('key', $order->get_order_key(),$order->get_checkout_order_received_url()));
             $woo = WC()->version;
-            if($woo > '5.9'){
+            if($woo > '6.0'){
 		    
                 die();
             }
