@@ -6,7 +6,7 @@ if (!defined('ABSPATH')) exit;
 Plugin Name: Paycorp Sampath Bank IPG
 License URI: https://www.paycorp.com.au/
 Description: Sampath IPG by Paycorp.
-Version: 1.8.6.4 - woocommerce 6.4.1
+Version: 1.8.6.5 - woocommerce 6.5
 Author: Paycorp International
 
 */
@@ -50,15 +50,15 @@ function woocommerce_sampath_bank_gateway()
             $this->sucess_responce_code = $this->settings['sucess_responce_code'];
             add_action('init', array(&$this, 'check_SampathIPG_response'));
             $this->gateway_config();
-            if ( version_compare( WC()->version, '6.5', '<' )) {
+            if ( version_compare( WC()->version, '6.6', '<' )) {
                 add_action('woocommerce_update_options_payment_gateways_' . $this->id, array(&$this, 'process_admin_options'));
-            } 
+            }
             else{
               $woo = WC();
                add_action('woocommerce_update_options_payment_gateways_' . $woo, array(&$this, 'process_admin_options'));
             }
 
-            
+
         }
 
 
@@ -68,7 +68,7 @@ function woocommerce_sampath_bank_gateway()
         public function init_form_fields()
         {
 
-	
+
             $this->form_fields = array(
                 'enabled' => array(
                     'title' => __('Enable/Disable', 'paycorp'),
@@ -205,12 +205,12 @@ function woocommerce_sampath_bank_gateway()
             global $wpdb;
             $order = new WC_Order($order_id);
 			$actual_link = $order->get_checkout_payment_url();//added new method to support 4.6
-			
+
 		   //$actual_link = $order->get_checkout_order_received_url();
            //$actual_link = add_query_arg('order', $order_id, add_query_arg('key', $order->get_order_key(),$order->get_checkout_order_received_url()));
             $woo = WC()->version;
-            if($woo > '6.5'){
-		    
+            if($woo > '6.6'){
+
                 die();
             }
             $order_payment_info = array(
@@ -228,7 +228,7 @@ function woocommerce_sampath_bank_gateway()
                 );
 
             $ipg_url = $this->gateway->initialize($order_payment_info);
-		
+
             return array('result' => 'success', 'redirect' => $ipg_url);
         }
 
@@ -283,8 +283,8 @@ function woocommerce_sampath_bank_gateway()
                         $comments .= "<br> IPG RESPONSE CODE: " . $completeResponse->responseCode;
 						$comments .= '<br>Response Text : ' . $completeResponse->responseText;
 					    $comments .= '<br>Txn Reference : ' . $completeResponse->txnReference;
-                    
-                
+
+
                         $order->update_status('failed');
                         $order->add_order_note($comments);
 
@@ -297,7 +297,7 @@ function woocommerce_sampath_bank_gateway()
                         }
                     }
                 } else {
-                    
+
                     $comments = "<b>Payment Failed</b>";
 					$comments .= '<br>Txn Reference : ' . $completeResponse->txnReference;
                     $comments .= '<br>Response Code : ' . $completeResponse->responseCode;
@@ -354,18 +354,18 @@ function woocommerce_sampath_bank_gateway()
 
     function paycorp_sampath_dispaly_success_message()
     {
-        
+
         if (isset($_GET['paycorp_txn_id'])) {
             $txn_id = $_GET['paycorp_txn_id'];
 
             echo '<div class="woocommerce-message">Transaction was processed successfully. Transaction ID - ' . $txn_id . '</div>';
     }
-    do_action( 'woocommerce_thankyou_' . $order->payment_method, $order->get_id()); 
+    do_action( 'woocommerce_thankyou_' . $order->payment_method, $order->get_id());
     do_action( 'woocommerce_thankyou', $order->get_id());
     }
-    
+
     add_shortcode('paycorp_sampath_ipg_dispaly_success_msg', 'paycorp_sampath_dispaly_success_message');
-    
+
 }
 
 ob_flush();
