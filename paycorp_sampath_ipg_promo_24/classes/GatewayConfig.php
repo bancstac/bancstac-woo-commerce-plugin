@@ -6,7 +6,7 @@ class GatewayConfig
 
     public function __construct($app_path, $config)
     {
-        date_default_timezone_set('Asia/Colombo');
+        //date_default_timezone_set('Asia/Colombo');
         $this->app_path = $app_path;
         $this->client_config = $config;
     }
