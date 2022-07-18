@@ -6,7 +6,7 @@ if (!defined('ABSPATH')) exit;
 Plugin Name: Paycorp Sampath Bank IPG PROMO 24
 License URI: https://www.paycorp.lk/
 Description: Sampath IPG by Paycorp 24 Month.
-Version: 1.8.6.6 - woocommerce 6.6.1
+Version: 1.8.6.7 - woocommerce 6.7
 Promo 24
 Author: Paycorp International
 
@@ -52,7 +52,7 @@ function woocommerce_sampath_bank_promo_24_gateway()
             $this->sucess_responce_code = $this->settings['sucess_responce_code'];
             add_action('init', array(&$this, 'check_SampathIPG_response'));
             $this->gateway_config();
-            if ( version_compare( WC()->version, '6.7', '<' )) {
+            if ( version_compare( WC()->version, '6.8', '<' )) {
                 add_action('woocommerce_update_options_payment_gateways_' . $this->id, array(&$this, 'process_admin_options'));
             }
             else{
@@ -217,7 +217,7 @@ function woocommerce_sampath_bank_promo_24_gateway()
 		   //$actual_link = $order->get_checkout_order_received_url();
            //$actual_link = add_query_arg('order', $order_id, add_query_arg('key', $order->get_order_key(),$order->get_checkout_order_received_url()));
             $woo = WC()->version;
-            if($woo > '6.7'){
+            if($woo > '6.8'){
                 die();
             }
             $order_payment_info = array(
