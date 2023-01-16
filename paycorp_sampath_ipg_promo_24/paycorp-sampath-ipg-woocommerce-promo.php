@@ -6,7 +6,7 @@ if (!defined('ABSPATH')) exit;
 Plugin Name: Paycorp Sampath Bank IPG PROMO 24
 License URI: https://www.paycorp.lk/
 Description: Sampath IPG by Paycorp 24 Month.
-Version: 1.8.7.2 - woocommerce 7.2.3
+Version: 1.8.7.3 - woocommerce 7.3.0
 Promo 24
 Author: Paycorp International
 
