@@ -6,7 +6,7 @@ if (!defined('ABSPATH')) exit;
 Plugin Name: Paycorp Sampath Bank IPG
 License URI: https://www.paycorp.com.au/
 Description: Sampath IPG by Paycorp.
-Version: 1.8.7.2 - woocommerce 7.2.3
+Version: 1.8.7.3 - woocommerce 7.3.0
 Author: Paycorp International
 
 */
